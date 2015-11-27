@@ -3,17 +3,26 @@
 	var defaults = {
 		window: "#popup",
 		onClick: function () {
+
 		},
 		onMouseMove: function (event) {
+
 		},
 		onMouseLeave: function (event) {
-		},
-		show: function () {
+
 		},
 		onInit: function () {
+
 		},
 		onMouseOver: function () {
 
+		},
+		onMouseOut: function () {
+
+		},
+		offset: {
+			x: 10,
+			y: -20
 		}
 	};
 	var cfg;
@@ -27,7 +36,7 @@
 
 				var $this = $(this);
 
-				// on init
+				// onInit
 				cfg.onInit.call(this);
 
 				// onClick
@@ -37,12 +46,14 @@
 
 				// return event omMouse move
 				$this.mousemove(function (e) {
+
 					cfg.onMouseMove(e);
+
 					$(cfg.window)
 						.css({
 							"position": "absolute",
-							"top": e.pageY,
-							"left": e.pageX
+							"top": e.pageY + cfg.offset.y,
+							"left": e.pageX + cfg.offset.x
 						})
 				});
 
@@ -51,9 +62,14 @@
 					cfg.onMouseOver.call(this);
 				});
 
-				//if mouse out
+				// mouse leave
 				$this.mouseleave(function (e) {
 					cfg.onMouseLeave(e);
+				});
+
+				// mouse out
+				$this.mouseout(function () {
+					cfg.onMouseOut.call(this);
 				});
 
 			});
@@ -113,6 +129,7 @@
 			cfg = $.extend({}, defaults, options, cfg);
 
 			return this.each(function () {
+
 				$(cfg.window).empty();
 				$(cfg.window).append(content);
 			})
