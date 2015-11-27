@@ -1,14 +1,27 @@
 body {
 	font: 400 15px/1.5 Helvetica, Arial, sans-serif;
+	background-color: lightgrey
+}
+#layout {
+	float: left;
+	margin: 100px 0 0 100px;
 }
 .hover {
 	width: 200px;
 	height: 200px;
 	border: 1px dotted grey;
-	margin-left: 200px;
-	margin-top: 100px;
 	position: relative;
+	background-color: white;
+	display: inline-block
 }
 #popup {
 	pointer-events: none;
+}
+.ui {
+	display: inline-block;
+	vertical-align: top;
+}
+button {
+	display: block;
+	margin-bottom: 5px;
 }

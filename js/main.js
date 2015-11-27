@@ -13,7 +13,6 @@ $(document).ready(function () {
 
 		onClick: function () {
 
-			console.log(target.tiptool("state").data("isEmpty"));
 		},
 
 		onMouseOver: function () {
@@ -25,10 +24,8 @@ $(document).ready(function () {
 
 		onMouseMove: function (e) {
 
-			var pageX, pageY, pos;
-			pageX = e.pageX;
-			pageY = e.pageY;
-			pos = "x: " + pageX + " y: " + pageY;
+			var pos;
+			pos = "x: " + e.pageX + " y: " + e.pageY;
 
 			$(this)
 				.tiptool("update", pos);
@@ -36,8 +33,8 @@ $(document).ready(function () {
 			$(popup)
 				.css({
 					"position": "absolute",
-					"top": pageY + 20,
-					"left": pageX + 30
+					"top": e.pageY + 20,
+					"left": e.pageX + 30
 				})
 		},
 
@@ -69,8 +66,16 @@ $(document).ready(function () {
 	$(".state").tiptool({
 		onClick: function () {
 
-			target.tiptool("state").data()
+			var vis = target.tiptool("state").data("visible"),
+				empty = target.tiptool("state").data("empty");
+
+			target.html("popup is:<br>" + "visible: " + vis + "<br>" + " empty: " + empty);
 		}
+	});
+
+	$(".clear").click(function () {
+
+		target.empty();
 	})
 
 });
