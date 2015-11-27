@@ -1,36 +1,33 @@
 (function ($) {
 
 	var defaults = {
+
 		window: "#popup",
+
 		onClick: function () {
-
 		},
+
 		onMouseMove: function (event) {
-
 		},
+
 		onMouseLeave: function (event) {
-
 		},
+
 		onInit: function () {
-
 		},
+
 		onMouseOver: function () {
-
 		},
+
 		onMouseOut: function () {
-
-		},
-		offset: {
-			x: 10,
-			y: -20
 		}
 	};
 	var cfg;
 
 	var methods = {
-		init: function (options, cfg) {
+		init: function (cfg) {
 
-			cfg = $.extend({}, defaults, options, cfg);
+			cfg = $.extend({}, defaults, cfg);
 
 			return this.each(function () {
 
@@ -41,6 +38,7 @@
 
 				// onClick
 				$this.click(function () {
+
 					cfg.onClick.call(this);
 				});
 
@@ -48,90 +46,123 @@
 				$this.mousemove(function (e) {
 
 					cfg.onMouseMove(e);
-
-					$(cfg.window)
-						.css({
-							"position": "absolute",
-							"top": e.pageY + cfg.offset.y,
-							"left": e.pageX + cfg.offset.x
-						})
 				});
 
 				// mouse over
 				$this.mouseover(function () {
+
 					cfg.onMouseOver.call(this);
 				});
 
 				// mouse leave
 				$this.mouseleave(function (e) {
+
 					cfg.onMouseLeave(e);
 				});
 
 				// mouse out
 				$this.mouseout(function () {
+
 					cfg.onMouseOut.call(this);
 				});
 
 			});
 		},
-		destroy: function (options, cfg) {
 
-			cfg = $.extend({}, defaults, options, cfg);
+		destroy: function (cfg) {
+
+			cfg = $.extend({}, defaults, cfg);
 
 			return this.each(function () {
 
-				var $this = $(this);
-				if ($(cfg.window).length > 0) {
-					$(cfg.window).remove();
-				}
+				var $this = $(this),
+					data = $this.data();
 
+				$this.removeData('tiptool');
+				$(cfg.window).remove();
 			})
 
 		},
-		show: function (options, cfg) {
 
-			cfg = $.extend({}, defaults, options, cfg);
+		show: function (cfg) {
+
+			cfg = $.extend({}, defaults, cfg);
 
 			return this.each(function () {
+
 				var $this = $(this);
 
 				$(cfg.window).show();
-
 			});
 
 		},
-		hide: function (options, cfg) {
-			cfg = $.extend({}, defaults, options, cfg);
+
+		hide: function (cfg) {
+			cfg = $.extend({}, defaults, cfg);
 
 			return this.each(function () {
+
 				var $this = $(this);
 
 				$(cfg.window).hide();
-
 			});
 		},
-		create: function (options, cfg) {
 
-			cfg = $.extend({}, defaults, options, cfg);
+		create: function (cfg) {
+
+			cfg = $.extend({}, defaults, cfg);
 
 			return this.each(function () {
 
 				var $this = $(this);
 
 				if ($(cfg.window).length == 0) {
+
 					var popupWindow = "<div id=" + cfg.window.substr(1) + "></div>";
 					$(popupWindow).empty().appendTo("body");
 				}
 			})
 		},
-		update: function (content, options, cfg) {
 
-			cfg = $.extend({}, defaults, options, cfg);
+		update: function (content, cfg) {
+
+			cfg = $.extend({}, defaults, cfg);
 
 			return this.each(function () {
 
 				$(cfg.window).empty();
 				$(cfg.window).append(content);
+			})
+		},
+
+		popup: function (cfg) {
+
+			cfg = $.extend({}, defaults, cfg);
+
+			return this.each(function () {
+
+				var $this = $(this);
+
+				$this.data({
+					window: cfg.window
+				});
+			})
+		},
+
+		state: function (cfg) {
+
+			cfg = $.extend({}, defaults, cfg);
+
+			return this.each(function () {
+
+				var $this = $(this);
+
+				$this.data({
+					visible: $(cfg.window).filter(":visible").length,
+					empty: $(cfg.window).filter(":empty").length
+				});
+
+				debug($this.data());
 			})
 		}
 	};
