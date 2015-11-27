@@ -1,14 +1,14 @@
 body {
-	font : 400 15px/1.5 Helvetica, Arial, sans-serif;
-	}
+	font: 400 15px/1.5 Helvetica, Arial, sans-serif;
+}
 .hover {
-	width       : 200px;
-	height      : 200px;
-	border      : 1px dotted grey;
-	margin-left : 200px;
-	margin-top  : 100px;
-	position    : relative;
-	}
+	width: 200px;
+	height: 200px;
+	border: 1px dotted grey;
+	margin-left: 200px;
+	margin-top: 100px;
+	position: relative;
+}
 #popup {
-	pointer-events : none;
-	}
+	pointer-events: none;
+}

@@ -150,7 +150,7 @@
 		} else if (typeof method === 'object' || !method) {
 			return methods.init.apply(this, arguments);
 		} else {
-			$.error('Метод с именем ' + method + ' не существует для jQuery.tiptool');
+			$.error('Method ' + method + ' does not exist for jQuery.tiptool');
 		}
 
 	};
