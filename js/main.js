@@ -7,7 +7,7 @@ $(document).ready(function () {
 		onInit: function () {
 
 			$(this)
-				.tiptool("create")
+				.tiptool("build")
 				.tiptool("hide");
 		},
 
@@ -59,7 +59,7 @@ $(document).ready(function () {
 	$(".init").tiptool({
 		onClick: function () {
 
-			$(".hover").tiptool("create");
+			$(".hover").tiptool("build");
 		}
 	});
 

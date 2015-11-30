@@ -108,7 +108,7 @@
 			});
 		},
 
-		create: function (cfg) {
+		build: function (cfg) {
 
 			cfg = $.extend({}, defaults, cfg);
 
